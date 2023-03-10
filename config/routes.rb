@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   
   post 'user/regist'
-  post 'messages/regist'
-
+  post 'user/:name/message/regist' => 'messages#regist'
   root "hello#index"
 end
