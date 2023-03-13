@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   def regist
     @user = User.find_by(name: params[:name])
-    @message = Message.new(message: params[:message], user_id:@user.id)
+    @message = @user.messages.new(message: params[:message]) 
     if @message.save
       render json: 'OK'
     else
