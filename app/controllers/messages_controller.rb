@@ -14,20 +14,11 @@ class MessagesController < ApplicationController
     @messages =Message.joins(:user).where(users: {name: params[:name]})
     
     if @messages.length !=0
-      @messages.each do |message|
-        if result_message == nil
-          result_message='"message": ['
-        else
-          result_message += ','
-        end  
-        result_message += ' { "registered_at": "' + message.created_at.to_s + '",'
-        result_message += ' "message": "' + message.message + '"}'
-      end
-      result_message += ']'  
+      render json: @messages, only:[:created_at, :message]
     else
-      result_message='0件'
+      render json: '0件'
     end
-    render json: result_message
+    
   end
   
 end
