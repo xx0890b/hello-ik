@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_10_051143) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_120351) do
   create_table "messages", force: :cascade do |t|
     t.text "message"
     t.integer "user_id"
@@ -24,4 +24,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_051143) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "messages", "users"
 end

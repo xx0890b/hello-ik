@@ -12,13 +12,9 @@ class MessagesController < ApplicationController
   def show
     result_message=nil
     @messages =Message.joins(:user).where(users: {name: params[:name]})
-    
-    if @messages.length !=0
-      render json: @messages, only:[:created_at, :message]
-    else
-      render json: '0件'
-    end
-    
+
+    render json: @messages, only:[:created_at, :message]
+ 
   end
   
 end
