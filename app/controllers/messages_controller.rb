@@ -14,4 +14,10 @@ class MessagesController < ApplicationController
     render json: @messages, only:[:created_at, :message] 
   end
 
+  def search
+    @messages =Message.joins(:user).where(users: {name: params[:name]}).where(created_at: params[:start_date_time]..params[:end_date_time])
+    render json: @messages, only:[:created_at, :message] 
+
+  end
+  
 end
