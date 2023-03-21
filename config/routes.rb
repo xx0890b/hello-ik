@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   get 'user/:name/message' => 'messages#list'
   post 'user/:name/message/regist' => 'messages#regist'
   root "hello#index"
- 
+  get 'user/:name/message' => 'messages#list'
+  get 'user/:name/message/unread' => 'messages#unread_list'
 end
