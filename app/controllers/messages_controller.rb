@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  require "time"
+  
   def regist
     @user = User.find_by(name: params[:name])
     @message = @user.messages.new(message: params[:message]) 
@@ -29,8 +31,9 @@ class MessagesController < ApplicationController
 
 
   def at
-    user = User.find_by(name: params[:name])
-    date_time = params[:date_time].sub(/T/," ")
+    user = User.find_by(name: params[:name])   
+    t = Time.parse(params[:date_time])
+    date_time = t.strftime("%Y-%m-%d %H:%M:%S")
     status, message = user.get_message_by_date_time(date_time)
     if status
       message = message.as_json(only:[:created_at, :message] )
@@ -45,9 +48,6 @@ class MessagesController < ApplicationController
   private
 
   def change_read_status
-    # @messages.each do |message|
-    #   message.toggle!(:read_status) if message.read_status
-    # end
     @messages.update_all(read_status: true)
   end
 end
